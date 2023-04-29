@@ -27,6 +27,8 @@ db.once('open', () => {
 //require package used in the project
 //設定express-handlebars樣版引擎
 const exphbs = require('express-handlebars')
+
+const RL = require('./models/RL')
 const restaurantList = require('./restaurant.json')
 
 //setting template engine
@@ -43,7 +45,10 @@ app.use(express.static('public'))
 //設定路由
 //res.render意指解析HTML樣板並繪製出瀏覽器的畫面，express會回傳HTML來呈現前端樣板
 app.get('/', (req, res)=>{  
-    res.render('index',{ restaurant: restaurantList.results })
+    RL.find()
+        .lean()
+        .then( RL_data => res.render('index',{ RL_data }))
+        .catch( error => console.error(error))
 })
 // 因為params宣告為restaurants
 app.get('/restaurants/:restaurant_id', (req, res) => {
