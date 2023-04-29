@@ -2,8 +2,27 @@
 //require packages used in the project
 //載入express
 const express = require('express')
+const mongoose = require('mongoose') // 載入 mongoose
+
+// 加入這段 code, 僅在非正式環境時, 使用 dotenv
+if (process.env.NODE_ENV !== 'production'){
+    require('dotenv').config()
+}
+
 const app = express()
+// 設定連線到 mongoDB
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }) 
 const port = 3000
+
+const db = mongoose.connection // 取得資料庫連線狀態
+// 連線異常
+db.on('error', () => {
+    console.log('mongodb error!')
+})
+// 連線成功
+db.once('open', () => {
+    console.log('mongodb connected!')
+})
 
 //require package used in the project
 //設定express-handlebars樣版引擎
@@ -50,5 +69,5 @@ app.get('/search', (req, res)=>{
 // star and listen on the express server
 // 開始監聽express server
 app.listen(port, ()=>{
-    console.log(`Express is listening on localhost:${port}`)
+    console.log(`App is running on http://localhost:${port}`)
 })
