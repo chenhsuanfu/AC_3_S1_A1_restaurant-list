@@ -32,8 +32,8 @@ const restaurantList = require('./restaurant.json')
 //setting template engine
 //透過app.engine定義要使用的樣板引擎
 //透過app.set告訴express說要設定的view engine是handlebars
-app.engine('handlebars', exphbs({ defaultLayout: 'main'}))
-app.set('view engine', 'handlebars')
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+app.set('view engine', 'hbs')
 
 //setting static files 
 //設定express路由以提供靜態檔案
