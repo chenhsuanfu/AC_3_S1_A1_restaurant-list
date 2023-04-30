@@ -1,21 +1,17 @@
 
-//require packages used in the project
-//載入express
 const express = require('express')
-const mongoose = require('mongoose') // 載入 mongoose
 const exphbs = require('express-handlebars')
+
+const mongoose = require('mongoose') // 載入 mongoose
+const RL = require('./models/RL')
+
 const bodyParser = require('body-parser')
 
 // 加入這段 code, 僅在非正式環境時, 使用 dotenv
 if (process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
 }
-
-const app = express()
-// 設定連線到 mongoDB
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }) 
-const port = 3000
-
 const db = mongoose.connection // 取得資料庫連線狀態
 // 連線異常
 db.on('error', () => {
@@ -26,36 +22,22 @@ db.once('open', () => {
     console.log('mongodb connected!')
 })
 
-const RL = require('./models/RL')
-const restaurantList = require('./restaurant.json')
+const app = express()
+const port = 3000
 
-//setting template engine
-//透過app.engine定義要使用的樣板引擎
-//透過app.set告訴express說要設定的view engine是handlebars
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
-
-//setting static files 
-//設定express路由以提供靜態檔案
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
-//routes setting
-//設定路由
-//res.render意指解析HTML樣板並繪製出瀏覽器的畫面，express會回傳HTML來呈現前端樣板
+// 瀏覽全部的餐廳
 app.get('/', (req, res)=>{  
     RL.find()
         .lean()
         .then( RL_data => res.render('index',{ RL_data }))
         .catch( error => console.error(error))
 })
-// 因為params宣告為restaurants
-app.get('/restaurants/:restaurant_id', (req, res) => {
-    //console.log('req.parms.restaurant_id', req.params.restaurant_id)
-    const restaurantOne = restaurantList.results.find(restaurant => 
-        restaurant.id.toString() === req.params.restaurant_id)
-    res.render('show', { restaurant: restaurantOne })
-})
+
 
 app.get('/search', (req, res)=>{
     //console.log('req.query', req.query)
@@ -70,6 +52,7 @@ app.get('/search', (req, res)=>{
     
 })
 
+// 新增餐廳
 app.get('/RL_data/new', (req, res) => {
     return res.render('new')
 })
@@ -77,6 +60,14 @@ app.get('/RL_data/new', (req, res) => {
 app.post('/RL_data', (req, res) => {
     RL.create( req.body )
         .then(() => res.redirect('/'))
+        .catch(error => console.log(error))
+})
+
+app.get('/RL_data/:id', (req, res) => {
+    const id = req.params.id
+    return RL.findById(id)
+        .lean()
+        .then((RL_data) => res.render('show', {RL_data}))
         .catch(error => console.log(error))
 })
 
