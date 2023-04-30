@@ -88,6 +88,14 @@ app.post('/RL_data/:id/edit', (req, res) => {
         .catch(error => console.log(error))
 })
 
+// 刪除特定頁面
+app.post('/RL_data/:id/delete', (req, res) => {
+    const id = req.params.id
+    return RL.findByIdAndDelete(id)
+        .then(()=> res.redirect('/'))
+        .catch(error => console.log(error))
+})
+
 // star and listen on the express server
 // 開始監聽express server
 app.listen(port, ()=>{
