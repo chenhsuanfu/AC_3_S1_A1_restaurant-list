@@ -63,11 +63,28 @@ app.post('/RL_data', (req, res) => {
         .catch(error => console.log(error))
 })
 
+// 瀏覽特定頁面
 app.get('/RL_data/:id', (req, res) => {
     const id = req.params.id
     return RL.findById(id)
         .lean()
         .then((RL_data) => res.render('show', {RL_data}))
+        .catch(error => console.log(error))
+})
+
+// 編輯頁面
+app.get('/RL_data/:id/edit', (req, res) => {
+    const id = req.params.id
+    return RL.findById(id)
+        .lean()
+        .then((RL_data) => res.render('edit', {RL_data}))
+        .catch(error => console.log(error))
+})
+
+app.post('/RL_data/:id/edit', (req, res) => {
+    const id = req.params.id
+    RL.findByIdAndUpdate(id, req.body)
+        .then(()=> res.redirect(`/RL_data/${id}`))
         .catch(error => console.log(error))
 })
 
