@@ -3,6 +3,8 @@
 //載入express
 const express = require('express')
 const mongoose = require('mongoose') // 載入 mongoose
+const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
 
 // 加入這段 code, 僅在非正式環境時, 使用 dotenv
 if (process.env.NODE_ENV !== 'production'){
@@ -24,10 +26,6 @@ db.once('open', () => {
     console.log('mongodb connected!')
 })
 
-//require package used in the project
-//設定express-handlebars樣版引擎
-const exphbs = require('express-handlebars')
-
 const RL = require('./models/RL')
 const restaurantList = require('./restaurant.json')
 
@@ -40,6 +38,7 @@ app.set('view engine', 'hbs')
 //setting static files 
 //設定express路由以提供靜態檔案
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 //routes setting
 //設定路由
@@ -69,6 +68,16 @@ app.get('/search', (req, res)=>{
    
     res.render('index', { restaurant: restaurants, keyword: keyword })
     
+})
+
+app.get('/RL_data/new', (req, res) => {
+    return res.render('new')
+})
+
+app.post('/RL_data', (req, res) => {
+    RL.create( req.body )
+        .then(() => res.redirect('/'))
+        .catch(error => console.log(error))
 })
 
 // star and listen on the express server
