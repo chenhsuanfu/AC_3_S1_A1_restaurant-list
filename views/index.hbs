@@ -1,13 +1,13 @@
 <!-- search bar -->
 <div class="container search-bar">
   <div class="search-bar-outer">
-    <div class="search-bar-inner">
+    <div class="search-bar-inner" id="search-bar">
       <form action="/search">
-        <div class="input-group">
+        <div class="input-group mb-3">
           <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
-            value="{{keyword}}" aria-describedby="button-addon2">
+             aria-describedby="button-addon2" value="{{keyword}}">
           <div class="input-group-append">
-            <button class="btn btn-secondary" type="submit" id="search-button"><i class="fas fa-search"></i>Search</button>
+            <button class="btn btn-secondary" type="submit" id="search-button">Search</button>
           </div>
         </div>
       </form>
