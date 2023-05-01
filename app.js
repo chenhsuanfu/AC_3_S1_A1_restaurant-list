@@ -83,7 +83,7 @@ app.get('/RL_data/:id/edit', (req, res) => {
         .catch(error => console.log(error))
 })
 
-app.post('/RL_data/:id/edit', (req, res) => {
+app.put('/RL_data/:id', (req, res) => {
     const id = req.params.id
     RL.findByIdAndUpdate(id, req.body)
         .then(()=> res.redirect(`/RL_data/${id}`))
@@ -91,7 +91,7 @@ app.post('/RL_data/:id/edit', (req, res) => {
 })
 
 // 刪除特定頁面
-app.post('/RL_data/:id/delete', (req, res) => {
+app.delete('/RL_data/:id', (req, res) => {
     const id = req.params.id
     return RL.findByIdAndDelete(id)
         .then(()=> res.redirect('/'))
