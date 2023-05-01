@@ -1,8 +1,8 @@
-<h1 class="mb-3 RL-create-title">Edit</h1>
-<div class="container">
+<h1 class="mb-3 RL-create-title text-dark">Edit</h1>
+<div class="container bg-light">
     <form action="/RL_data/{{ RL_data._id }}?_method=PUT" method="POST">
         <div class="container">
-            <div class="mb-3">
+            <div class="mb-3 text-dark">
                 <label for="name" class="form-label mb-2">店名：</label>
                 <input type="text" class="form-control mb-2" id="name" placeholder="輸入店名" name="name"
                     value="{{ RL_data.name }}">
@@ -47,7 +47,7 @@
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-success">保存</button>
+                <button type="submit" class="btn btn-success text-dark">保存</button>
                 <a href="/"><button type="button" class="btn btn-dark">返回</button></a>
             </div>
         </div>
