@@ -42,7 +42,7 @@
                       class=" btn btn-warning btn-sm">Edit</button></a>
                   <a href="./RL_data/{{ this._id }}" class="text-secondary"><button type="button"
                       class=" btn btn-success btn-sm">Detail</button></a>
-                  <form action="./RL_data/{{ this._id }}/delete" method="POST" style="display: inline;">
+                  <form action="./RL_data/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
                     <button type="submit" class="btn btn-danger btn-sm text-white">Delete</button>
                   </form>
                 </div>

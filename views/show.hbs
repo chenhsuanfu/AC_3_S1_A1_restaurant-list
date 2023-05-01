@@ -1,7 +1,7 @@
 <div>
   <a href="/RL_data/{{ RL_data._id }}/edit"><button class=" btn btn-warning btn-sm">Edit</button></a>
   <a href="/"><button class=" btn btn-dark btn-sm">回首頁</button></a>
-  <form action="/RL_data/{{ RL_data._id }}/delete" method="POST" style="display: inline;">
+  <form action="/RL_data/{{ RL_data._id }}?_method=DELETE" method="POST" style="display: inline;">
     <button type="submit" class="btn btn-danger btn-sm text-white">Delete</button>
   </form> 
 </div>
