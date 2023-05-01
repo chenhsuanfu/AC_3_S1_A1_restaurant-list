@@ -5,6 +5,7 @@ const mongoose = require('mongoose') // 載入 mongoose
 const RL = require('./models/RL')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const routes = require('./routes')
 
 // 加入這段 code, 僅在非正式環境時, 使用 dotenv
 if (process.env.NODE_ENV !== 'production'){
@@ -29,14 +30,9 @@ app.set('view engine', 'hbs')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+app.use(routes)
 
-// 瀏覽全部的餐廳
-app.get('/', (req, res)=>{  
-    RL.find()
-        .lean()
-        .then( RL_data => res.render('index',{ RL_data }))
-        .catch( error => console.error(error))
-})
+
 
 // 搜尋特定的餐廳
 app.get('/search', (req, res)=>{
@@ -54,49 +50,6 @@ app.get('/search', (req, res)=>{
         .catch(error => console.log(error))
 })
 
-// 新增餐廳
-app.get('/RL_data/new', (req, res) => {
-    return res.render('new')
-})
-
-app.post('/RL_data', (req, res) => {
-    RL.create( req.body )
-        .then(() => res.redirect('/'))
-        .catch(error => console.log(error))
-})
-
-// 瀏覽特定頁面
-app.get('/RL_data/:id', (req, res) => {
-    const id = req.params.id
-    return RL.findById(id)
-        .lean()
-        .then((RL_data) => res.render('show', {RL_data}))
-        .catch(error => console.log(error))
-})
-
-// 編輯頁面
-app.get('/RL_data/:id/edit', (req, res) => {
-    const id = req.params.id
-    return RL.findById(id)
-        .lean()
-        .then((RL_data) => res.render('edit', {RL_data}))
-        .catch(error => console.log(error))
-})
-
-app.put('/RL_data/:id', (req, res) => {
-    const id = req.params.id
-    RL.findByIdAndUpdate(id, req.body)
-        .then(()=> res.redirect(`/RL_data/${id}`))
-        .catch(error => console.log(error))
-})
-
-// 刪除特定頁面
-app.delete('/RL_data/:id', (req, res) => {
-    const id = req.params.id
-    return RL.findByIdAndDelete(id)
-        .then(()=> res.redirect('/'))
-        .catch(error => console.log(error))
-})
 
 // star and listen on the express server
 // 開始監聽express server
