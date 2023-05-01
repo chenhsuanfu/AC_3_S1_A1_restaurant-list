@@ -3,9 +3,11 @@ const router = express.Router()
 const home = require('./modules/home')
 const restaurants = require('./modules/restaurants')
 const users = require('./modules/users')
+const { authenticator } = require('../middleware/auth')
 
-router.use('/', home)
-router.use('/RL_data', restaurants)
+
+router.use('/RL_data', authenticator, restaurants)
 router.use('/users', users)
+router.use('/', authenticator, home)
 
 module.exports = router
