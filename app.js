@@ -38,18 +38,20 @@ app.get('/', (req, res)=>{
         .catch( error => console.error(error))
 })
 
-
+// 搜尋特定的餐廳
 app.get('/search', (req, res)=>{
     //console.log('req.query', req.query)
     const keyword = req.query.keyword
-    const restaurants = restaurantList.results.filter(restaurant =>{
-        return restaurant.name.toLowerCase().includes(keyword) ||
-        restaurant.category.toLowerCase().includes(keyword) ||
-        restaurant.name_en.toLowerCase().includes(keyword)
+    const restaurants = RL_data.results.filter(RL_data =>{
+        return RL_data.name.toLowerCase().includes(keyword) ||
+        RL_data.category.toLowerCase().includes(keyword) ||
+        RL_data.name_en.toLowerCase().includes(keyword)
     })
    
-    res.render('index', { restaurant: restaurants, keyword: keyword })
-    
+    RL.find()
+        .lean()
+        .then(() => res.render('index', { RL_data: restaurants, keyword: keyword }))
+        .catch(error => console.log(error))
 })
 
 // 新增餐廳
