@@ -1,54 +1,55 @@
-<h1 class="mb-1 RL-create-title">編輯餐廳</h1>
+<h1 class="mb-3 RL-create-title">Edit</h1>
 <div class="container">
     <form action="/RL_data/{{ RL_data._id }}/edit" method="POST">
-        <div class="mb-3">
-            <label for="name" class="form-label">店名：</label>
-            <input type="text" class="form-control" id="name" placeholder="輸入店名" name="name" value="{{ RL_data.name }}">
-        </div>
+        <div class="container">
+            <div class="mb-3">
+                <label for="name" class="form-label mb-2">店名：</label>
+                <input type="text" class="form-control mb-2" id="name" placeholder="輸入店名" name="name"
+                    value="{{ RL_data.name }}">
 
-        <div class="mb-3">
-            <label for="name_en" class="form-label">英文店名：</label>
-            <input type="text" class="form-control" id="name_en" placeholder="輸入英文店名" name="name_en" value="{{ RL_data.name_en }}">
-        </div>
+                <label for="name_en" class="form-label mb-2">英文店名：</label>
+                <input type="text" class="form-control mb-2" id="name_en" placeholder="輸入英文店名" name="name_en"
+                    value="{{ RL_data.name_en }}">
 
-        <div class="mb-3">
-            <label for="category" class="form-label">分類：</label>
-            <input type="text" class="form-control" id="category" placeholder="美式" name="category" value="{{ RL_data.category }}">
-        </div>
+                <label for="category" class="form-label mb-2">分類：</label>
+                <input type="text" class="form-control mb-2" id="category" placeholder="輸入類別" name="category" list="categoryOptions"
+                    value="{{ RL_data.category }}">
+                    <datalist id="categoryOptions">
+                        <option>美式料理</option>
+                        <option>中東料理</option>
+                        <option>日式料理</option>
+                        <option>義式料理</option>
+                    </datalist>
 
-        <div class="mb-3">
-            <label for="image" class="form-label">圖片連結：</label>
-            <input type="url" class="form-control" id="image" placeholder="輸入圖片網址" name="image" value="{{ RL_data.image }}">
-        </div>
+                <label for="image" class="form-label mb-2">圖片連結:</label>
+                <input type="url" class="form-control mb-2" id="image" placeholder="輸入圖片網址" name="image"
+                    value="{{ RL_data.image }}">
 
-        <div class="mb-3">
-            <label for="location" class="form-label">地址：</label>
-            <input type="text" class="form-control" id="location" placeholder="輸入地址" name="location" value="{{ RL_data.location }}">
-        </div>
+                <label for="location" class="form-label mb-2">地址：</label>
+                <input type="text" class="form-control mb-2" id="location" placeholder="輸入地址" name="location"
+                    value="{{ RL_data.location }}">
 
-        <div class="mb-3">
-            <label for="phone" class="form-label">電話：</label>
-            <input type="tel" class="form-control" id="phone" placeholder="輸入店家電話 06 2345 6789" name="phone" value="{{ RL_data.phone }}">
-        </div>
+                <label for="phone" class="form-label mb-2">電話：</label>
+                <input type="tel" class="form-control mb-2" id="phone" placeholder="輸入店家電話 06 2345 6789" name="phone"
+                    value="{{ RL_data.phone }}">
 
-        <div class="mb-3">
-            <label for="google_map" class="form-label">Google Map連結:</label>
-            <input type="url" class="form-control" id="google_map" placeholder="輸入google map網址" name="google_map" value="{{ RL_data.google_map }}">
-        </div>
+                <label for="google_map" class="form-label mb-2">Google Map連結:</label>
+                <input type="url" class="form-control mb-2" id="google_map" placeholder="輸入google map網址" name="google_map"
+                    value="{{ RL_data.google_map }}">
 
-        <div class="mb-3">
-            <label for="rating" class="form-label">評分：</label>
-            <input type="number" class="form-control" id="rating" placeholder="輸入評分" name="rating" value="{{ RL_data.rating }}">
-        </div>
+                <label for="rating" class="form-label mb-2">評分：</label>
+                <input type="number" class="form-control mb-2" id="rating" placeholder="輸入評分" name="rating" min="0" max="5" step="0.1"
+                    value="{{ RL_data.rating }}">
 
-        <div class="mb-3">
-            <label for="description" class="form-label">敘述：</label>
-            <input type="text" class="form-control" id="description" name="description" value="{{ RL_data.description }}">
-        </div>
+                <label for="description" class="form-label mb-2">敘述：</label>
+                <input type="text" class="form-control" id="description" name="description" 
+                    value="{{ RL_data.description }}">
+            </div>
 
-        <div class="mb-3">
-            <button type="submit" class="btn btn-success">保存</button>
-            <a href="/"><button type="button" class="btn btn-dark">返回</button></a>
-        </div>        
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">保存</button>
+                <a href="/"><button type="button" class="btn btn-dark">返回</button></a>
+            </div>
+        </div>
     </form>
 </div>
