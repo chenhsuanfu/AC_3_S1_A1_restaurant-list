@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
     const _id = req.params.id
     return RL.findById({ _id, userId })
         .lean()
-        .then((RL_data) => res.render('show', {RL_data}))
+        .then((restaurants) => res.render('show', {restaurants}))
         .catch(error => console.log(error))
 })
 
@@ -31,7 +31,7 @@ router.get('/:id/edit', (req, res) => {
     const _id = req.params.id
     return RL.findById({ _id, userId })
         .lean()
-        .then((RL_data) => res.render('edit', {RL_data}))
+        .then((restaurants) => res.render('edit', {restaurants}))
         .catch(error => console.log(error))
 })
 

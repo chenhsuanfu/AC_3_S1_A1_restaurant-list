@@ -7,7 +7,7 @@ router.get('/', (req, res)=>{
     const userId = req.user._id  
     RL.find({ userId })
         .lean()
-        .then( RL_data => res.render('index',{ RL_data }))
+        .then( restaurants => res.render('index',{ restaurants }))
         .catch( error => console.error(error))
 })
 
@@ -16,14 +16,14 @@ router.get('/search', (req, res) => {
     const keywords = req.query.keyword.trim().toLowerCase()
     RL.find()
         .lean()
-        .then(RL_data => {
-            const filterRLname = RL_data.filter(
+        .then(restaurants => {
+            const filterRLname = restaurants.filter(
                 data => 
                     data.name.trim().toLowerCase().includes(keywords) ||
                     data.name_en.trim().toLowerCase().includes(keywords) ||
                     data.category.trim().toLowerCase().includes(keywords)
             )
-            res.render('index', { RL_data: filterRLname, keywords})
+            res.render('index', { restaurants: filterRLname, keywords})
         })
         .catch(error => console.log(error))
     
