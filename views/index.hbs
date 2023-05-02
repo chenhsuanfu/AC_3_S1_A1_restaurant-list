@@ -1,5 +1,5 @@
 
-<a class="btn btn-danger mb-3" href="/RL_data/new">Create</a>
+<a class="btn btn-danger mb-3" href="/restaurants/new">Create</a>
 
 
 <!-- search bar -->
@@ -24,7 +24,7 @@
     <div class="row">
       <div class="col-md-10 col-12 mx-auto">
         <div class="row row-cols-1 row-cols-sm-3">
-          {{#each RL_data}}
+          {{#each restaurants}}
           <li>
             <div class="col">
               <div class="card mb-1">
@@ -42,11 +42,11 @@
                   </span>
                 </div>
                 <div class="card-footer d-flex justify-content-end flex-wrap">
-                  <a href="./RL_data/{{ this._id }}/edit" class="text-secondary"><button type="button"
+                  <a href="./restaurants/{{ this._id }}/edit" class="text-secondary"><button type="button"
                       class=" btn btn-warning btn-sm">Edit</button></a>
-                  <a href="./RL_data/{{ this._id }}" class="text-secondary"><button type="button"
+                  <a href="./restaurants/{{ this._id }}" class="text-secondary"><button type="button"
                       class=" btn btn-success btn-sm">Detail</button></a>
-                  <form action="./RL_data/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+                  <form action="./restaurants/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
                     <button type="submit" class="btn btn-danger btn-sm text-white">Delete</button>
                   </form>
                 </div>

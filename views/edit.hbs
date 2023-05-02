@@ -1,19 +1,19 @@
 <h1 class="mb-3 RL-create-title text-dark">Edit</h1>
 <div class="container bg-light">
-    <form action="/RL_data/{{ RL_data._id }}?_method=PUT" method="POST">
+    <form action="/restaurants/{{ restaurants._id }}?_method=PUT" method="POST">
         <div class="container">
             <div class="mb-3 text-dark">
                 <label for="name" class="form-label mb-2">店名：</label>
                 <input type="text" class="form-control mb-2" id="name" placeholder="輸入店名" name="name"
-                    value="{{ RL_data.name }}">
+                    value="{{ restaurants.name }}">
 
                 <label for="name_en" class="form-label mb-2">英文店名：</label>
                 <input type="text" class="form-control mb-2" id="name_en" placeholder="輸入英文店名" name="name_en"
-                    value="{{ RL_data.name_en }}">
+                    value="{{ restaurants.name_en }}">
 
                 <label for="category" class="form-label mb-2">分類：</label>
                 <input type="text" class="form-control mb-2" id="category" placeholder="輸入類別" name="category" list="categoryOptions"
-                    value="{{ RL_data.category }}">
+                    value="{{ restaurants.category }}">
                     <datalist id="categoryOptions">
                         <option>美式料理</option>
                         <option>中東料理</option>
@@ -23,27 +23,27 @@
 
                 <label for="image" class="form-label mb-2">圖片連結:</label>
                 <input type="url" class="form-control mb-2" id="image" placeholder="輸入圖片網址" name="image"
-                    value="{{ RL_data.image }}">
+                    value="{{ restaurants.image }}">
 
                 <label for="location" class="form-label mb-2">地址：</label>
                 <input type="text" class="form-control mb-2" id="location" placeholder="輸入地址" name="location"
-                    value="{{ RL_data.location }}">
+                    value="{{ restaurants.location }}">
 
                 <label for="phone" class="form-label mb-2">電話：</label>
                 <input type="tel" class="form-control mb-2" id="phone" placeholder="輸入店家電話 06 2345 6789" name="phone"
-                    value="{{ RL_data.phone }}">
+                    value="{{ restaurants.phone }}">
 
                 <label for="google_map" class="form-label mb-2">Google Map連結:</label>
                 <input type="url" class="form-control mb-2" id="google_map" placeholder="輸入google map網址" name="google_map"
-                    value="{{ RL_data.google_map }}">
+                    value="{{ restaurants.google_map }}">
 
                 <label for="rating" class="form-label mb-2">評分：</label>
                 <input type="number" class="form-control mb-2" id="rating" placeholder="輸入評分" name="rating" min="0" max="5" step="0.1"
-                    value="{{ RL_data.rating }}">
+                    value="{{ restaurants.rating }}">
 
                 <label for="description" class="form-label mb-2">敘述：</label>
                 <input type="text" class="form-control" id="description" name="description" 
-                    value="{{ RL_data.description }}">
+                    value="{{ restaurants.description }}">
             </div>
 
             <div class="mb-3">
