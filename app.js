@@ -1,6 +1,7 @@
 
 const express = require('express')
 const session = require('express-session')
+const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const RL = require('./models/RL')
 const bodyParser = require('body-parser')
@@ -21,11 +22,13 @@ const port = process.env.PORT
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
+
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true
 }))
+
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
